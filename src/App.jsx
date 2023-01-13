@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHN } from "./hooks/useHN";
 import "./App.css";
 
 const App = () => {
   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
-  const requestOptions = {
+  const fetchOptions = useRef({
     headers: {
       'Authorization': `${process.env.REACT_APP_AUTH_HEADER}`, 
       'Content-Type': 'application/json'
     }  
-  };
+  });
   const [query, setQuery] = useState("");
-  // Avoids infinite loop cause by resetting requestOptions value on every re-render. We don't want fetchOptions to change.
-  const [fetchOptions, ] = useState(requestOptions);
-  const { status, data, error } = useHN(query, fetchOptions);
+  const { status, data, error } = useHN(query, fetchOptions.current);
 
   const handleSubmit = e => {
     e.preventDefault();
