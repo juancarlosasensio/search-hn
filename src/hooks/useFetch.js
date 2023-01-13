@@ -31,7 +31,7 @@ export const useFetch = (url, options = {}) => {
       dispatch({ type: "FETCHING" });
 
       if (cache.current[url]) {
-        console.log("This url was cached!!", url);
+        console.log("This url/query was cached!", url);
         const data = cache.current[url];
 
         dispatch({ type: "FETCHED", payload: data });
