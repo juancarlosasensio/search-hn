@@ -11,7 +11,7 @@ const App = () => {
     }  
   });
   const [query, setQuery] = useState("");
-  const { status, data, error } = useHN(query, fetchOptions);
+  const { status, data, error } = useHN(query, fetchOptions.current);
 
   const handleSubmit = e => {
     e.preventDefault();
